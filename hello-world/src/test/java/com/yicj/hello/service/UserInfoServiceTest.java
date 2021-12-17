@@ -45,7 +45,7 @@ public class UserInfoServiceTest {
 
     @Test
     public void findByNameOrDesc(){
-        List<UserInfo> list = userInfoService.findByNameOrDesc(null, "中国人");
+        List<UserInfo> list = userInfoService.findByNameOrDesc(null, "中华人民共和国国歌");
         log.info("list size : {}", list.size());
         list.forEach(item -> log.info("===> item : {}", item));
     }
