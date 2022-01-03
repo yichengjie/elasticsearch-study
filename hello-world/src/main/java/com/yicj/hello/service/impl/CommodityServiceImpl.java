@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public Page<Commodity> pageQuery(Integer pageNo, Integer pageSize, String kw) {
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+        Query searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.matchPhraseQuery("name", kw))
                 .withPageable(PageRequest.of(pageNo, pageSize))
                 .build() ;
