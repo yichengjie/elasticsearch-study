@@ -12,7 +12,7 @@ import java.util.List;
 public class UserInfoController {
 
     @Autowired
-    UserInfoService userInfoService;
+    private UserInfoService userInfoService;
 
     @RequestMapping("findAll")
     public Iterable<UserInfo> findAll() {
