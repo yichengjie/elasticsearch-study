@@ -75,7 +75,7 @@ public class CommodityServiceTest {
         Page<Commodity> page = commodityService.pageQuery(0, 10, "切片");
         log.info("total page : {}", page.getTotalPages());
         log.info("number : {}", page.getNumber());
-        log.info("content : {}", page.getContent());
+        Optional.of(page.getContent()).ifPresent(ul -> ul.forEach(li -> log.info("li: {}", li)));
     }
 
 }
