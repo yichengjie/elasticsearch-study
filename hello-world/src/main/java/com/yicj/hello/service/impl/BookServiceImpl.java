@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.GetQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Service;
@@ -65,5 +66,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public SearchHits<Book> searchBook1(String keyword) {
         return esBookRepository.find(keyword);
+    }
+
+    @Override
+    public Book findById(String id) {
+        GetQuery byId = GetQuery.getById(id);
+        return elasticsearchOperations.queryForObject(byId, Book.class);
     }
 }

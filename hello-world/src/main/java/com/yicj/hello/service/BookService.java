@@ -20,4 +20,6 @@ public interface BookService {
     List<Book> searchBook(String keyword) ;
 
     SearchHits<Book> searchBook1(String keyword) ;
+
+    Book findById(String id) ;
 }
