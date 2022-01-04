@@ -22,15 +22,20 @@ public class BookController {
     @Autowired
     private BookService bookService ;
 
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    public Map<String,String> save(@RequestBody Book book){
+    @PostMapping("addBook")
+    public Map<String,String> addBook(@RequestBody Book book){
         bookService.addBook(book);
         Map<String, String> map = new HashMap<>() ;
         map.put("msg", "ok") ;
         return map ;
     }
 
-    @RequestMapping(value = "search", method = RequestMethod.GET)
+    @PostMapping("save")
+    public String save(@RequestBody Book book){
+        return bookService.save(book) ;
+    }
+
+    @GetMapping("search")
     public SearchHits<Book> search(String key){
         return bookService.searchBook1(key) ;
     }

@@ -6,7 +6,11 @@ import com.yicj.hello.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +29,8 @@ public class BookServiceImpl implements BookService {
     private ESBookRepository esBookRepository ;
     //@Autowired
     //private TransactionTemplate transactionTemplate ;
+    @Autowired
+    private ElasticsearchOperations elasticsearchOperations;
 
     @Override
     public void addBook(Book book) {
@@ -39,6 +45,16 @@ public class BookServiceImpl implements BookService {
         }catch (Exception e){
             log.error("保存ES错误!, {}", e.getMessage(), e);
         }
+    }
+
+    @Override
+    public String save(Book book){
+        IndexQuery indexQuery = new IndexQueryBuilder()
+                .withId(book.getId().toString())
+                .withObject(book)
+                .build();
+        IndexCoordinates indexCoordinates = IndexCoordinates.of("book");
+        return elasticsearchOperations.index(indexQuery,indexCoordinates);
     }
 
     @Override

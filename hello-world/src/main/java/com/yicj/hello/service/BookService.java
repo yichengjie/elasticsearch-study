@@ -15,6 +15,8 @@ public interface BookService {
 
     void addBook(Book book) ;
 
+    String save(Book book) ;
+
     List<Book> searchBook(String keyword) ;
 
     SearchHits<Book> searchBook1(String keyword) ;

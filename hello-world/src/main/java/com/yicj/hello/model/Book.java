@@ -7,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,8 +34,9 @@ public class Book implements Serializable {
     @Field(type = FieldType.Double)
     private Double price;
     //创建日期
+    //@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    @Field(type = FieldType.Date,format = DateFormat.basic_date_time)
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Date createTime;
     //更新日期
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
